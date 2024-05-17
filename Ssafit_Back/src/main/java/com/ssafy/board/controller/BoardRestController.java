@@ -51,6 +51,18 @@ public class BoardRestController {
 			return new ResponseEntity<List<Board>>(board, HttpStatus.NO_CONTENT);
 		}
 	}
+	
+	@GetMapping("/comment/{userId}")
+	public ResponseEntity<List<Board>> getUserReviewList(@PathVariable String userId) {
+		List<Board> board = boardService.readBoardAllByUserId(userId);
+		// 가져왔는데 board가 null이면 예외처리를 해줘라 404처리 (직접해볼것)
+		if (board != null) {
+			return new ResponseEntity<List<Board>>(board, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<Board>>(board, HttpStatus.NO_CONTENT);
+		}
+	}
+	
 	// 게시글 전체 조회 (검색 포함)
 	@GetMapping("/board")
 	@Operation(summary="게시글 조회", description = "게시글 조건에 따른 조회 가능")

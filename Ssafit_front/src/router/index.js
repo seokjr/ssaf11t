@@ -18,6 +18,7 @@ import commentView from '@/views/CommentView.vue'
 
 import MyPageView from '@/views/MyPageView.vue'
 import MyPageMainView from '@/components/mypage/myPageMain.vue'
+import MyPageCommentListView from '@/components/mypage/myPageCommentList.vue'
 
 
 const router = createRouter({
@@ -100,6 +101,11 @@ const router = createRouter({
           path: ':id',
           name: 'myPageMain',
           component: MyPageMainView
+        },
+        {
+          path: 'commentList',
+          name: 'commentList',
+          component: MyPageCommentListView
         }
       ]
     },
