@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="user !== null">
     <h4>리뷰 등록</h4>
     <fieldset>
       <div class="form-floating mb-3">
@@ -14,10 +14,9 @@
       <div class="d-flex justify-content-end">
           <button class="btn btn-outline-primary" @click="createReview">등록</button>
       </div>
-      
-      
     </fieldset>
   </div>
+  <h3 v-else class="text-center">로그인을 하면 찜 기능과 댓글 작성 기능을 사용하실 수 있습니다.</h3>
 </template>
   
 <script setup>
@@ -32,8 +31,10 @@ const reviewstore = useReviewStore()
 const youtubestore = useYoutubeStore();
 const userStore = useUserStore();
 
+const user = userStore.getUser()
+
 const review = ref({
-  userId: userStore.getUser().id,
+  userId: user ? user.id : '',
   videoId: route.params.id,
   videoTitle: youtubestore.selectedVideo.snippet.title,
   channelName : youtubestore.selectedVideo.snippet.channelTitle,

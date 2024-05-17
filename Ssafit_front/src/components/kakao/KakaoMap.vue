@@ -19,30 +19,6 @@
 <script setup>
   import { onMounted, ref, toRaw } from 'vue';
   let map = null;
-  const ps = new kakao.maps.services.Places()
-  const infoList = ref([])
-
-  const searchPlaces = function(){
-    keyword = document.getElementById('keyword').value;
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
-    }
-    ps.keywordSearch(keyword, placesSearchCB);
-  }
-  const placesSearchCB = function(data, status, pagination){
-    if (status === kakao.maps.services.Status.OK) {
-      displayPlaces(data);
-      displayPagination(pagination);
-    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-      alert('검색 결과가 존재하지 않습니다.');
-      return;
-    } else if (status === kakao.maps.services.Status.ERROR) {
-      alert('검색 결과 중 오류가 발생했습니다.');
-      return;
-    }
-  }
-  
-
   const initMap = function () {
     let myCenter = new kakao.maps.LatLng(33.450701, 126.570667); //카카오본사
     if (navigator.geolocation) {
@@ -125,7 +101,7 @@
   
 <style scoped>
   #map {
-    width: 800px;
+    width: 500px;
     height: 400px;
   }
 </style>

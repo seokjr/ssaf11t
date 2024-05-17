@@ -18,7 +18,7 @@
 
         <div class="d-flex justify-content-between">
             <button class="btn btn-secondary flex-fill mx-1" @click="">회원정보 수정</button>
-            <button class="btn btn-danger flex-fill mx-1" @click="">영상 찜 목록</button>
+            <button class="btn btn-danger flex-fill mx-1" @click="goToJjimList">영상 찜 목록</button>
             <button class="btn btn-primary flex-fill mx-1" @click="goToCommentList">작성 댓글 목록</button>
             <button class="btn btn-success flex-fill mx-1" @click="">친구 추가/목록</button>
         </div>
@@ -50,6 +50,9 @@ onMounted(() => {
 watch(() => userStore.userInfo, (newInfo) => {
   userInfo.value = newInfo;
 });
+const goToJjimList = () => {
+  router.push({name: 'jjimList'})
+}
 
 const goToCommentList = () => {
   router.push({ name: 'commentList' });

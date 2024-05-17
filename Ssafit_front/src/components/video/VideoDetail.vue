@@ -2,7 +2,7 @@
   <div v-if="store.selectedVideo" class="container">
     <h3>
       {{ videoTitle }}
-      <button @click="toggleJjim(store.selectedVideo)">
+      <button v-if="user !== null" @click="toggleJjim(store.selectedVideo)">
         {{ isFavorite ? '🧡' : '🤍' }}
       </button>
     </h3>
@@ -24,12 +24,16 @@
 <script setup>
 import { useYoutubeStore } from "@/stores/youtube"
 import { useJjimStore } from "@/stores/jjimStore"
+import { useUserStore } from '@/stores/userStore';
 import ReviewView from "@/views/ReviewView.vue"
 import { computed, watch } from "vue"
 import _ from 'lodash'
 
 const store = useYoutubeStore()
 const jjimStore = useJjimStore()
+const userStore = useUserStore();
+
+const user = userStore.getUser()
 
 const videoTitle = computed(() => {
   return _.unescape(store.selectedVideo.snippet.title)
