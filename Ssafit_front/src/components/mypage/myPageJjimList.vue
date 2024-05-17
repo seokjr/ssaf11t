@@ -14,7 +14,7 @@
           <th>영상게시일</th>
         </tr>
         <jjimListItem v-for="Jjim in currentPageJjimList"
-        :key="Jjim.jjimId" :Jjim="Jjim" @click="clickReview(Jjim)"/>
+        :key="Jjim.jjimId" :Jjim="Jjim"/>
       </table>
       <nav aria-label="Page navigation" v-if="currentPageJjimList.length != 0">
         <ul class="pagination d-flex justify-content-center">
