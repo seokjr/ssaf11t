@@ -19,7 +19,6 @@
   const router = useRouter()
   const clickVideo = function(){
     store.clickVideo(props.video)
-    console.log(props.video)
     router.push({ name: "videoDetail", params: { id: store.selectedVideo.id.videoId } })
   }
 

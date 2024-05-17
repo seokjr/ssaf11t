@@ -29,7 +29,6 @@ export const useYoutubeStore = defineStore('youtube', () => {
   }
   
   const clickVideo = function(video){
-    console.log(video)
     selectedVideo.value = video
   }
 

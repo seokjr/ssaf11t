@@ -1,6 +1,11 @@
 <template>
   <div v-if="store.selectedVideo" class="container">
-    <h3>{{ videoTitle }}</h3><!--<button @click="toggleFavorite(myProduct)" v-if="myProduct.isFavorite">🧡</button>-->
+    <h3>
+      {{ videoTitle }}
+      <button @click="toggleJjim(store.selectedVideo)">
+        {{ isFavorite ? '🧡' : '🤍' }}
+      </button>
+    </h3>
     <iframe
       width="560"
       height="315"
@@ -12,43 +17,55 @@
       allowfullscreen
     ></iframe>
     <hr>
-    <ReviewView/>
+    <ReviewView />
   </div>
 </template>
-  
 
 <script setup>
-import { useYoutubeStore } from "@/stores/youtube";
-import ReviewView from "@/views/ReviewView.vue";
-import { computed, ref } from "vue";
+import { useYoutubeStore } from "@/stores/youtube"
+import { useJjimStore } from "@/stores/jjimStore"
+import ReviewView from "@/views/ReviewView.vue"
+import { computed, watch } from "vue"
 import _ from 'lodash'
 
-const store = useYoutubeStore();
+const store = useYoutubeStore()
+const jjimStore = useJjimStore()
 
-const videoTitle = computed(()=>{
+const videoTitle = computed(() => {
   return _.unescape(store.selectedVideo.snippet.title)
 })
 
 const videoURL = computed(() => {
-  let videoId = "";
-  if(!store.selectedVideo.id.hasOwnProperty('videoId')) {
-    console.log(store.selectedVideo.id);
-    videoId = store.selectedVideo.id;
+  let videoId = ""
+  if (!store.selectedVideo.id.hasOwnProperty('videoId')) {
+    videoId = store.selectedVideo.id
   } else {
-    console.log(store.selectedVideo.id.videoId);
-    videoId = store.selectedVideo.id.videoId;
+    videoId = store.selectedVideo.id.videoId
   }
-  console.log(`https://www.youtube.com/embed/${videoId}`);
-  return `https://www.youtube.com/embed/${videoId}` // 여기 부분이 url이다. id만 알고 있으면 넣을 수 있다.
- })
+  return `https://www.youtube.com/embed/${videoId}`
+})
 
- const toggleFavorite = (myProduct) => {
-    store.JjimClick(myProduct)
-  }
+const isFavorite = computed(() => {
+  return jjimStore.jjimList.some(jjim => jjim.videoId === store.selectedVideo.id || jjim.videoId === store.selectedVideo.id.videoId)
+})
+
+const toggleJjim = async (video) => {
+  await jjimStore.toggleJjim(video)
+  await jjimStore.getJjimListAll();  // ensure the jjimList is up to date
+}
+
+watch(() => store.selectedVideo, async () => {
+  await jjimStore.getJjimListAll()
+})
 </script>
+
 <style scoped>
-  .container{
-    text-align: center;
-    align-items: center;
-  }
+.container {
+  text-align: center;
+  align-items: center;
+}
+button {
+  background-color: white;
+  border: none;
+}
 </style>

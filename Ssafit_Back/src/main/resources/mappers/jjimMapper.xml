@@ -20,7 +20,7 @@
 	
 	<!-- 찜 등록 -->
 	<insert id="insertJjim" parameterType="Jjim">
-		INSERT INTO jjim
+		INSERT INTO jjim (user_id, video_id, video_title, channel_name, publish_time, img_source)
 		VALUES (#{userId}, #{videoId}, #{videoTitle}, #{channelName}, #{publishTime}, #{imgSource})
 	</insert>
 	
