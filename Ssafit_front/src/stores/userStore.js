@@ -28,7 +28,7 @@ export const useUserStore = defineStore('user', () => {
       // 세션 스토리지에 사용자 정보 저장
       // sessionStorage.setItem('user', JSON.stringify(response.data))
       const userNow = {
-        id : response.data.id, nickname : response.data.nickname, name : response.data.name
+        id : response.data.id, nickname : response.data.nickname
       }
       sessionStorage.setItem('user', JSON.stringify(userNow))
       alert('로그인 성공')
