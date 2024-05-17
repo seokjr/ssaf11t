@@ -93,7 +93,6 @@ public class UserRestController {
 	
 	@GetMapping("/userInfo/{userId}")
 	public ResponseEntity<?> getUserInfo(@PathVariable String userId) {
-		System.out.println(userId);
 		User user = userService.chooseOneUser(userId);
 		
 		if (user == null) {

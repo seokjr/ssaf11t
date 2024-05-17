@@ -94,11 +94,11 @@ public class BoardRestController {
 
 	// 게시글 수정 (JSON 형태로 보낸다)
 	@PutMapping("/board/{userId}&{regDate}")
-	public ResponseEntity<Void> update(@PathVariable String userId, @PathVariable String regDate, @ModelAttribute Board board) {
+	public ResponseEntity<Void> update(@PathVariable String userId, @PathVariable String regDate, @RequestBody Board board) {
 		System.out.println(board);
-		Board changeOne = boardService.readBoardByIdRegDate(userId, regDate);
-		changeOne.setCommentContent(board.getCommentContent());
-		boardService.modifyBoard(changeOne); // id를 따로 보내왔다면 바구니(DTO)에 넣어놓고 보내자
+		System.out.println(userId + "," + regDate);
+		System.out.println("----");
+		boardService.modifyBoard(board); // id를 따로 보내왔다면 바구니(DTO)에 넣어놓고 보내자
 		return new ResponseEntity<Void>(HttpStatus.OK); // 조금 더 세밀하게 컨트롤할 수 있다.
 	}
 
