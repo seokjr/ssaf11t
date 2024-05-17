@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 네임스페이스에 DAO 풀패키지명을 작성 -->
+<mapper namespace="com.ssafy.board.model.dao.JjimDao">
+	<!-- 검색기능 --> 
+	<select id="search" resultType="Jjim" parameterType="SearchCondition">
+		SELECT *
+		FROM video
+		<!-- 동적쿼리(검색 조건) -->
+		<if test="key != null">
+			WHERE ${key} LIKE concat('%', #{word}, '%')
+		</if>
+		<!-- 동적쿼리(정렬 조건) -->
+		<if test="orderBy != null">
+			ORDER BY ${orderBy} ${orderByDir}
+		</if>
+	</select>
+	
+	<!-- 찜 등록 -->
+	<insert id="insertJjim" parameterType="Jjim">
+		INSERT INTO jjim
+		VALUES (#{userId}, #{videoId}, #{videoTitle}, #{channelName}, #{publishTime}, #{imgSource})
+	</insert>
+	
+	<!-- 찜 삭제 -->
+	<delete id="deleteJjim" parameterType="String">
+		DELETE FROM jjim
+		WHERE user_id = #{userId} AND video_id = #{videoId};
+	</delete>
+	
+	<!-- 찜 목록가져오기 아이디별로 -->
+	<select id="selectAllByUserId" resultType="Jjim" parameterType="String">
+		SELECT jjim_id, user_id, video_id, video_title, channel_name, date_format(publish_time, '%y-%m-%d') AS publish_time, img_source 
+		FROM jjim
+		WHERE user_id = #{userId};
+	</select>
+	
+	<!-- 찜 하나 가져오기 비디오랑 유저 아이디로-->
+	<select id="selectOneJjimById" resultType="Jjim" parameterType="String">
+		SELECT * FROM jjim
+		WHERE user_id = #{userId} AND video_id = #{videoId};
+	</select>
+</mapper>

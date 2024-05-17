@@ -1,0 +1,5 @@
+.sec1{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: scroll;
+}

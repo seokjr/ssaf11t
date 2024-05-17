@@ -1,0 +1,56 @@
+header {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+
+main{
+    width:  70%;
+    margin: 0 auto;
+    margin-top: 3em;
+}
+
+
+.card-img-top:hover {
+    cursor:pointer;
+}
+
+.card{
+    margin: 10px;
+    
+}
+
+
+#videoArea{
+    display: flex;
+    overflow: auto;
+    flex-wrap: nowrap;
+}
+
+
+     
+.cards > .row { 
+    overflow-x: auto; 
+    white-space: nowrap; 
+} 
+  
+.cards > .row > .col-xs-4 { 
+    display: inline-block; 
+    float: none; 
+} 
+
+.row>* {
+    width: 30% !important;
+    max-width: 50% !important;
+}  
+
+.card-text {
+    overflow-x: hidden;
+}
+
+
+
+
+
+
+
