@@ -30,4 +30,7 @@ public interface BoardService {
 	
 	//게시글 검색
 	public List<Board> search(SearchCondition searchCondition);
+	
+	// 댓글 뷰카운트 +1
+	public void updateViewCnt(int reviewId);
 }

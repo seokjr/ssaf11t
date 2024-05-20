@@ -68,6 +68,7 @@ const currentPageReviewList = computed(()=>{
 
   const router = useRouter()
   const clickReview = function(review){
+    reviewStore.increaseViewCnt(review)
     youtubeStore.clickReview(review.videoId);
     router.push({ name: "videoDetail", params: { id: review.videoId } })
   }

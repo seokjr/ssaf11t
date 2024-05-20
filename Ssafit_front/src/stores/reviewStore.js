@@ -13,6 +13,12 @@ export const useReviewStore = defineStore("review", () => {
         reviewList.value = res.data
       })
   }
+  const increaseViewCnt = function(review) {
+    axios.put(`${REST_REVIEW_API}/${review.reviewId}`)
+    .then((res)=>{
+      
+    })
+  }
 
   const getReviewList = async function(videoId) {
     await axios.get(`${REST_REVIEW_API}/${videoId}`)
@@ -21,7 +27,7 @@ export const useReviewStore = defineStore("review", () => {
       })
   }
 
-  const getUserReviewList = async function(userId) {
+  const getUserReviewList = async function() {
     await axios.get(`http://localhost:8080/review-api/comment/${userId}`)
       .then((res) => {
         reviewList.value = res.data
@@ -72,5 +78,6 @@ export const useReviewStore = defineStore("review", () => {
     searchReviewList,
     deleteReview,
     updateReview,
+    increaseViewCnt,
   };
 });

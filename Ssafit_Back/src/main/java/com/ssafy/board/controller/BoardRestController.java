@@ -73,17 +73,24 @@ public class BoardRestController {
 		return new ResponseEntity<List<Board>>(list, HttpStatus.OK);
 	}
 
-	// 게시글 상세 보기
-	@GetMapping("/board/{userId}&{regDate}")
-	public ResponseEntity<Board> detail(@PathVariable String userId, @PathVariable String regDate) {
-		Board board = boardService.readBoardByIdRegDate(userId, regDate);
-		// 가져왔는데 board가 null이면 예외처리를 해줘라 404처리 (직접해볼것)
-		if (board != null) {
-			return new ResponseEntity<Board>(board, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Board>(board, HttpStatus.NO_CONTENT);
-		}
+	// 게시글 조회수 업데이트
+	@PutMapping("/board/{reviewId}")
+	public ResponseEntity<?> updateViewCnt(@PathVariable int reviewId) {
+		boardService.updateViewCnt(reviewId);
+		System.out.println("여기로 오는지 확인");
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	// 게시글 상세 보기
+//	@GetMapping("/board/{userId}&{regDate}")
+//	public ResponseEntity<Board> detail(@PathVariable String userId, @PathVariable String regDate) {
+//		Board board = boardService.readBoardByIdRegDate(userId, regDate);
+//		// 가져왔는데 board가 null이면 예외처리를 해줘라 404처리 (직접해볼것)
+//		if (board != null) {
+//			return new ResponseEntity<Board>(board, HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<Board>(board, HttpStatus.NO_CONTENT);
+//		}
+//	}
 
 	// 게시글 등록 (Form 형식으로 넘어왔을 때) // 완료 안되었을 때 어떻게 처리할지 같은 건 아직 안했다. 이 부분은 해야할지도.
 	@PostMapping("/board")

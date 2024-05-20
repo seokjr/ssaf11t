@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 	// UserId랑 RegDate로 댓글 상세보기
 	@Override
 	public Board readBoardByIdRegDate(String userId, String regDate) {
-		boardDao.updateViewCnt(userId, regDate);
+//		boardDao.updateViewCnt(reviewId);
 		return boardDao.selectOneByUserIdRegDate(userId, regDate);
 	}
 
@@ -67,6 +67,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> readBoardAllByUserId(String userId) {
 		return boardDao.selectAllByUserId(userId);
+	}
+
+	@Override
+	public void updateViewCnt(int reviewId) {
+		boardDao.updateViewCnt(reviewId);
 	}
 
 }

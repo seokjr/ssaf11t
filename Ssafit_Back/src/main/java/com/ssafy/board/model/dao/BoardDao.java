@@ -29,7 +29,7 @@ public interface BoardDao {
 	public void updateBoard(Board board);
 
 	// 조회수 증가
-	public void updateViewCnt(String userId, String regDate);
+	public void updateViewCnt(int reviewId);
 	
 	// 검색 기능
 	public List<Board> search(SearchCondition searchCondition);

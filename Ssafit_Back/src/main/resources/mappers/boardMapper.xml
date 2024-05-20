@@ -43,10 +43,11 @@
 	</delete>
 	
 	<!-- 조회수 증가 -->
-	<update id="updateViewCnt" parameterType="String">
+	<update id="updateViewCnt" parameterType="int">
 		UPDATE comment
 		SET view_cnt = view_cnt+1
-		WHERE user_id = #{userId} AND reg_date = #{regDate};
+		WHERE review_id = #{reviewId}
+		<!-- WHERE user_id = #{userId} AND reg_date = #{regDate}; -->
 	</update>
 	
 	<!-- 게시글 수정 -->
