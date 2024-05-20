@@ -18,9 +18,12 @@
         <td>{{ review.commentContent }}</td>
         <td>{{ review.viewCnt }}</td>
         <td>{{ review.regDate }}</td>
-        <td>
+        <td v-if="userHasId && user.id===review.userId">
           <button @click="deleteReview(review.userId, review.regDate)">삭제</button>
           <button @click="openEditModal(review)">수정</button>
+        </td>
+        <td v-else>
+          본인 댓글만 가능합니다.
         </td>
       </tr>
     </table>
@@ -49,7 +52,7 @@
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="editCommentContent" v-model="editReview.commentContent" placeholder="내용">
+              <input type="text" class="form-control" id="editCommentContent" v-model="editReview.commentContent" placeholder="내용"  @keyup.enter="updateReview">
               <label for="editCommentContent">내용</label>
             </div>
           </div>
@@ -67,9 +70,13 @@
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted, watch, computed } from 'vue';
 import { useReviewStore } from '@/stores/reviewStore';
+import { useUserStore } from '@/stores/userStore';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Modal } from 'bootstrap'
+
+const { user } = useUserStore();
+const userHasId = computed(() => user && user.hasOwnProperty('id'));
 
 const store = useReviewStore()
 const route = useRoute()
