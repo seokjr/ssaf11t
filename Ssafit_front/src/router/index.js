@@ -20,6 +20,7 @@ import MyPageView from '@/views/MyPageView.vue'
 import MyPageMainView from '@/components/mypage/myPageMain.vue'
 import MyPageCommentListView from '@/components/mypage/myPageCommentList.vue'
 import MyPageJjimListView from '@/components/mypage/myPageJjimList.vue'
+import MyPageInfoChangeView from '@/components/mypage/myPageInfoChange.vue'
 
 
 const router = createRouter({
@@ -112,6 +113,11 @@ const router = createRouter({
           path: 'jjimList',
           name: 'jjimList',
           component: MyPageJjimListView
+        },
+        {
+          path: 'infoChange',
+          name: 'infoChange',
+          component: MyPageInfoChangeView
         }
       ]
     },

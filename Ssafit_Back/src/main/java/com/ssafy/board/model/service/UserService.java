@@ -19,4 +19,10 @@ public interface UserService {
 	
 	// 이메일 중복 확인용(컨트롤러 코드 간략화)
 	public User chooseOneUserByEmail(String email);
+	
+	// 유저 정보 수정
+	public void changeInfo(User user);
+	
+	// 유저 정보 삭제
+	public void removeUser(String userId);
 }

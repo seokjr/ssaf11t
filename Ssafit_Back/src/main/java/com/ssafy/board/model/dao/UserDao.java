@@ -20,4 +20,10 @@ public interface UserDao {
 	
 	// 이메일 중복 확인용(컨트롤러 코드 간략화)
 	public User selectUserByEmail(String email);
+	
+	// 유저 정보 수정용
+	public void updateUser(User user);
+	
+	// 유저 삭제
+	public void deleteUser(String userId);
 }

@@ -107,6 +107,7 @@ public class BoardRestController {
 	public ResponseEntity<Void> delete(@PathVariable String userId, @PathVariable String regDate) {
 		// 반환값에 따라서 실제로 지워졌는지 or 내가 없는 글을 지우려고 하지는 않는지 등의 상황에 따라
 		// 응답 코드가 바뀌면 프론트에서 처리하기가 더욱 수월해지겠다.
+		
 		boardService.removeBoard(userId, regDate);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

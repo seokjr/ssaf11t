@@ -64,6 +64,15 @@
       document.head.appendChild(script);
     }
   });
+
+  // const ps = new kakao.maps.services.Places();
+  // ps.keywordSearch('이태원 맛집', placesSearchCB)
+
+  // const placesSearchCB = function (data, status, pagination){
+  //   if (status === kakao.maps.services.Status.OK){
+
+  //   }
+  // }
   
   const myMarkerPosition = ref([
     [33.450701, 126.570667],

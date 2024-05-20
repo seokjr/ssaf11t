@@ -45,4 +45,15 @@ public class UserServiceImpl implements UserService{
 	public User chooseOneUserByEmail(String email) {
 		return userDao.selectUserByEmail(email);
 	}
+	@Override
+	public void changeInfo(User user) {
+		userDao.updateUser(user);
+	}
+
+	@Override
+	public void removeUser(String userId) {
+		userDao.deleteUser(userId);
+	}
+	
+	
 }

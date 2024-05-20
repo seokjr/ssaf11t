@@ -82,6 +82,7 @@ onMounted(() => {
   store.getReviewList(route.params.id)
 })
 
+// 수정 삭제부분 로그인한 아이디일 경우에만 가능하게 바꿔야할 것.
 const deleteReview = async function(userId, regDate) {
   await store.deleteReview(userId, regDate)
   await store.getReviewList(route.params.id)
