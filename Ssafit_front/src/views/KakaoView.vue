@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2 class="text-center">주변 헬스장 검색</h2>
+        <h2 class="text-center">운동할 곳을 찾아보아요!</h2>
         <KakaoMap/>
     </div>
 </template>
