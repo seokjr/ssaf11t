@@ -57,7 +57,7 @@ create table if not exists plans(
 );
 
 create table if not EXISTS friendships(
-	friendship_id INT PRIMARY KEY,
+	friendship_id INT PRIMARY KEY AUTO_INCREMENT,
     user1_id VARCHAR(30) NOT NULL,
     user2_id VARCHAR(30) NOT NULL,
     status ENUM('pending', 'accepted') DEFAULT 'pending',
@@ -73,3 +73,19 @@ create table if not EXISTS friendships(
         ON UPDATE CASCADE
 );
 
+DELIMITER //
+CREATE PROCEDURE generateUsers(IN numUsers INT)
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    
+    WHILE i <= numUsers DO
+        INSERT INTO users (id, password, nickname, name, email)
+        VALUES (CONCAT('user', i), CONCAT('pass', i), CONCAT('nick', i), CONCAT('name', i), CONCAT('e@', i));
+        
+        SET i = i + 1;
+    END WHILE;
+END //
+DELIMITER ;
+
+-- 프로시저 호출
+CALL generateUsers(7);

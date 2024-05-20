@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 네임스페이스에 DAO 풀패키지명을 작성 -->
+<mapper namespace="com.ssafy.board.model.dao.FriendshipDao">
+	<!-- 전체 목록 조회--> 
+	<select id="selectAll" resultType="Friendship">
+		SELECT *
+		FROM friendships
+	</select>
+	
+	<!-- 친구 요청 넣음 -->
+	<insert id="insertRequest" parameterType="Friendship">
+		INSERT INTO friendships (user1_id, user2_id)
+		VALUES (#{user1Id}, #{user2Id});
+	</insert>
+	
+	<!-- 친구 요청 수락 -->
+	<update id="acceptRequest" parameterType="Friendship">
+		UPDATE friendships
+		SET status = 'accepted'
+		WHERE user1_id = #{user1Id} AND user2_id = #{user2Id};
+	</update>
+	
+	<!-- 친구 요청 거절/친구 삭제 -->
+	<delete id="deleteFriendship" parameterType="Friendship">
+		DELETE FROM friendships
+		WHERE (user1_id = #{user1Id} AND user2_id = #{user2Id}) OR (user1_id = #{user2Id} AND user2_id = #{user1Id});
+	</delete>
+	
+	<!-- 이미 친구인 상대 리스트 검색 -->
+	<select id="selectPendingFriends" resultType="Friendship" parameterType="String">
+		SELECT * FROM friendships
+		WHERE status = 'pending' AND user2_id = #{id};
+	</select>
+	
+	<!-- 나한테 친구 요청중인 상대 리스트 검색 -->
+	<select id="selectAcceptedFriends" resultType="Friendship" parameterType="String">
+		SELECT * FROM friendships
+		WHERE status = 'accepted' AND (user1_id = #{id} OR user2_id = #{id});
+	</select>
+	
+	<!-- 중복 검사가 필요할 것 같다 -->
+	
+</mapper>

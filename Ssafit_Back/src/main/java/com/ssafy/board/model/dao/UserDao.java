@@ -26,4 +26,7 @@ public interface UserDao {
 	
 	// 유저 삭제
 	public void deleteUser(String userId);
+	
+	//유저 검색
+	public List<User> searchUser(Map<String, String> info);
 }

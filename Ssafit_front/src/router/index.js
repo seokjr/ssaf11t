@@ -21,6 +21,7 @@ import MyPageMainView from '@/components/mypage/myPageMain.vue'
 import MyPageCommentListView from '@/components/mypage/myPageCommentList.vue'
 import MyPageJjimListView from '@/components/mypage/myPageJjimList.vue'
 import MyPageInfoChangeView from '@/components/mypage/myPageInfoChange.vue'
+import MyPageFriendsView from '@/components/mypage/myPageFriends.vue'
 
 
 const router = createRouter({
@@ -118,7 +119,12 @@ const router = createRouter({
           path: 'infoChange',
           name: 'infoChange',
           component: MyPageInfoChangeView
-        }
+        },
+        {
+          path: 'friends/:id',
+          name: 'friends',
+          component: MyPageFriendsView
+        },
       ]
     },
   ]

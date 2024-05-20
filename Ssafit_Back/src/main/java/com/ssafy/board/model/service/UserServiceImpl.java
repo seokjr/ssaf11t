@@ -55,5 +55,11 @@ public class UserServiceImpl implements UserService{
 		userDao.deleteUser(userId);
 	}
 	
-	
+	@Override
+	public List<User> searchUser(String key, String word) {
+		Map<String, String> info = new HashMap<>();
+		info.put("key", key);
+		info.put("word", word);
+		return userDao.searchUser(info);
+	}
 }

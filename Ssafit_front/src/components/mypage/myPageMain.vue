@@ -20,7 +20,7 @@
             <button class="btn btn-secondary flex-fill mx-1" @click="goToInfoChange">회원정보 수정</button>
             <button class="btn btn-danger flex-fill mx-1" @click="goToJjimList">영상 찜 목록</button>
             <button class="btn btn-primary flex-fill mx-1" @click="goToCommentList">작성 댓글 목록</button>
-            <button class="btn btn-success flex-fill mx-1" @click="goToInfoChange">친구 추가/목록</button>
+            <button class="btn btn-success flex-fill mx-1" @click="goToFriends">친구 추가/목록</button>
         </div>
     </div>
     </div>
@@ -60,6 +60,10 @@ const goToCommentList = () => {
 
 const goToInfoChange = () => {
   router.push({name: 'infoChange'})
+}
+
+const goToFriends = () => {
+  router.push({ name: 'friends', params: { id: user.id } });
 }
 
 </script>

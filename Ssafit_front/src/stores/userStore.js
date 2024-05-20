@@ -117,6 +117,22 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
+  // id, nickname을 키로 가지는 user에 대한 배열{id:'ssafy', nickname:'ssafy'}
+  const userSearchResultList = ref([]);
+  const getUserSearchList = function(searchInfo) {
+    axios({
+      url: `${REST_USER_API}userSearch/${searchInfo.key}/${searchInfo.word}`,
+      method: 'GET',
+    })
+    .then((response) => {
+      userSearchResultList.value = response.data
+    })
+    .catch((error) => {
+      userSearchResultList.value = [];
+    }).finally (
+    )
+  }
+
   return { user, 
     login, 
     logout, 
@@ -125,5 +141,8 @@ export const useUserStore = defineStore('user', () => {
     getUserInfo, 
     userInfo, 
     changeUserInfo, 
-    deleteUserInfo }
+    deleteUserInfo,
+    userSearchResultList,
+    getUserSearchList
+  }
 })

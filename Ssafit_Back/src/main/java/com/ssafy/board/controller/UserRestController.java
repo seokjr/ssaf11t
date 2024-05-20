@@ -99,11 +99,24 @@ public class UserRestController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("수정 불가");
 		}
     }
+	
+	// 회원 탈퇴
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<?> deleteUser(@PathVariable String userId){
 			userService.removeUser(userId);
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
+	
+	// 회원 검색
+	@GetMapping("/userSearch/{key}/{word}")
+    public ResponseEntity<?> searchUser(@PathVariable String key, @PathVariable String word) {
+		try {
+			return ResponseEntity.ok(userService.searchUser(key, word));
+		} catch (Exception e) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+        
+    }
 	
 	
 }

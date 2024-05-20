@@ -41,4 +41,10 @@
 		DELETE FROM users
 		WHERE id = #{userId};
 	</delete>
+	
+	<select id="searchUser" resultType="Map" parameterType="User">
+		SELECT id, nickname
+		FROM users
+		WHERE ${key} LIKE concat('%', #{word}, '%');
+	</select>
 </mapper>
