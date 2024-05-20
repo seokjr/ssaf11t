@@ -8,7 +8,9 @@ export const useYoutubeStore = defineStore('youtube', () => {
   const youtubeSearch = function(keyword){
     const URL = 'https://www.googleapis.com/youtube/v3/search'
     const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
-    keyword = keyword + '운동'
+    if (!keyword.includes('운동')) {
+      keyword += ' 운동'; // 없다면 키워드에 '운동' 추가
+    }
     axios({
       url:URL,
       method : 'GET',
@@ -51,14 +53,6 @@ export const useYoutubeStore = defineStore('youtube', () => {
       return null
     }
   };
-
-  const JjimClick = (product) => {
-    const index = productList.value.findIndex((p) => p.name === product.name);
-    if (index !== -1) {
-        productList.value[index].isFavorite = !productList.value[index].isFavorite;
-        updateJjimCount();
-    }
-  }
 
   return { youtubeSearch, videos, clickVideo, selectedVideo, clickReview }
 })

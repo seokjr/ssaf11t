@@ -27,7 +27,7 @@ export const useReviewStore = defineStore("review", () => {
       })
   }
 
-  const getUserReviewList = async function() {
+  const getUserReviewList = async function(userId) {
     await axios.get(`http://localhost:8080/review-api/comment/${userId}`)
       .then((res) => {
         reviewList.value = res.data
