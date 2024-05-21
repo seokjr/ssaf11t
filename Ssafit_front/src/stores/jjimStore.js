@@ -17,6 +17,15 @@ export const useJjimStore = defineStore('jjim', () => {
   
   checkSession()
 
+  const friendjjimList = ref([])
+  const getfriendsJjimListAll = async function(friendid) {
+    if (!user.value) return;
+    await axios.get(`${REST_JJIM_API}/${friendid}`)
+      .then((res) => {
+        friendjjimList.value = res.data
+      })
+  }
+
   const getJjimListAll = async function() {
     if (!user.value) return;
     await axios.get(`${REST_JJIM_API}/${user.value.id}`)
@@ -62,5 +71,5 @@ export const useJjimStore = defineStore('jjim', () => {
     }
   }
 
-  return { getJjimListAll, addJjim, deleteJjim, toggleJjim, jjimList }
+  return { getJjimListAll, addJjim, deleteJjim, toggleJjim, jjimList, getfriendsJjimListAll, friendjjimList }
 })

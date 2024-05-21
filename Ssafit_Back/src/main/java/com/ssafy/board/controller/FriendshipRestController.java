@@ -91,7 +91,7 @@ public class FriendshipRestController {
 		List<User> list = new ArrayList<User>();
 		for(Friendship f : templist) {
 			User user;
-			if(id == f.getUser1Id()) {
+			if(id.equals(f.getUser1Id())) {
 				user = new User(f.getUser2Id(), userServiceImpl.chooseOneUser(f.getUser2Id()).getNickname());
 			} else {
 				user = new User(f.getUser1Id(), userServiceImpl.chooseOneUser(f.getUser1Id()).getNickname());

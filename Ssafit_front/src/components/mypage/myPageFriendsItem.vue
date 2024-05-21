@@ -1,13 +1,13 @@
 <template>
     <div class="container">
       <div class="box" style="background: #BDBDBD;">
-        <a href="http://www.naver.com"><img src="/images/jumping_cat.jpg" alt="Jumping Cat" class="profile" /></a>
+        <RouterLink :to="{name : 'friendJjimList', params : {id : someone.id}}">친구찜목록<img src="/images/jumping_cat.jpg" alt="Jumping Cat" class="profile" /></RouterLink>
       </div>
       <p class="text-center">{{ someone.nickname }}</p>
       <div>
         <button class="btn btn-outline-danger" v-if="props.type === 'friend'" @click="handleDeleteRequest">친구삭제</button>
         <button class="btn btn-outline-primary" v-if="props.type === 'someone' && !requestSent" @click="handleInsertRequest">친구요청</button>
-        <button class="btn btn-outline-primary" v-if="props.type === 'someone' && requestSent" @click="handleCancelRequest">요청취소</button>
+        <button class="btn btn-outline-danger" v-if="props.type === 'someone' && requestSent" @click="handleCancelRequest">요청취소</button>
         <button class="btn btn-outline-success" v-if="props.type === 'waiting'" @click="handleAcceptRequest">친구수락</button>
         <button class="btn btn-outline-danger" v-if="props.type === 'waiting'" @click="handleDeleteRequest">요청삭제</button>
       </div>
@@ -16,6 +16,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 import { useFriendStore } from '@/stores/friendStore';
 
 const friendStore = useFriendStore();
