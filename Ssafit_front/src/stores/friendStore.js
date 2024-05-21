@@ -11,8 +11,8 @@ export const useFriendStore = defineStore('friend', () => {
   const waitingFriendsList = ref([]);
 
   // 초기에 친구 관련 정보 받아오기(onMount)
-  const getAboutfriends = function(id) {
-    axios({
+  const getAboutfriends = async function(id) {
+    await axios({
       url: `${REST_Friend_API}accept/${id}`,
       method: 'GET',
     })
@@ -23,7 +23,7 @@ export const useFriendStore = defineStore('friend', () => {
     .catch((error) => {
       friendsList.value = [];
     })
-    axios({
+    await axios({
       url: `${REST_Friend_API}pending/${id}`,
       method: 'GET',
     })
@@ -74,7 +74,7 @@ export const useFriendStore = defineStore('friend', () => {
       data: {user1Id: my_id, user2Id: your_id}
     })
     .then((response) => {
-      alert('삭제 완료')
+      // alert('삭제 완료')
     })
     .catch((error) => {
       alert(error.response.data)
