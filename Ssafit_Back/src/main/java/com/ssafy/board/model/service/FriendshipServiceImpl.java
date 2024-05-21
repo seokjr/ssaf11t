@@ -46,4 +46,22 @@ public class FriendshipServiceImpl implements FriendshipService {
 		return friendshipDao.selectAcceptedFriends(id);
 	}
 
+	@Override
+	// 이 관계 이미 친구인가요?
+	public boolean areFriends(Friendship friendship) {
+		friendship.setStatus("accepted");
+		if(friendshipDao.getFriendshipByUserIdsAndStatus(friendship)!=null) {
+			return true;
+		} else {
+			Friendship f = friendship.reverseUserId();
+			f.setStatus("accepted");
+			if(friendshipDao.getFriendshipByUserIdsAndStatus(f)!=null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		
+	}
 }

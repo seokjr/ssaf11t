@@ -38,18 +38,22 @@ export const useFriendStore = defineStore('friend', () => {
 
   // 친구 요청 넣기
   const insertRequest = function(my_id, your_id) {
-    axios({
-      url: `${REST_Friend_API}insert`,
-      method: 'POST',
-      data: {user1Id: my_id, user2Id: your_id}
-    })
-    .then((response) => {
-      console.log('요청 완료')
-    })
-    .catch((error) => {
-      alert(error.response.data)
-    })
-  }
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${REST_Friend_API}insert`,
+        method: 'POST',
+        data: {user1Id: my_id, user2Id: your_id}
+      })
+      .then((response) => {
+        // console.log('요청 완료');
+        resolve(true); // 성공한 경우 true 반환
+      })
+      .catch((error) => {
+        alert(error.response.data);
+        resolve(false); // 실패한 경우 false 반환
+      });
+    });
+  };
 
   // 친구 요청 수락
   const acceptRequest = function(my_id, your_id) {
@@ -59,10 +63,10 @@ export const useFriendStore = defineStore('friend', () => {
       data: {user1Id: your_id, user2Id: my_id}
     })
     .then((response) => {
-      console.log('수락 완료')
+      // console.log('수락 완료')
     })
     .catch((error) => {
-      alert(error.response.data)
+      // alert(error.response.data)
     })
   }
 
@@ -77,7 +81,7 @@ export const useFriendStore = defineStore('friend', () => {
       // alert('삭제 완료')
     })
     .catch((error) => {
-      alert(error.response.data)
+      // alert(error.response.data)
     })
   }
 

@@ -23,7 +23,7 @@ footer {
   height: 50px;
   width: 98%;
   justify-content: space-around;
-  color: grey;
+  color: rgb(123, 169, 187);
   background-color: white; /* footer가 다른 요소 위에 있을 때 투명하지 않도록 설정 */
 }
 </style>

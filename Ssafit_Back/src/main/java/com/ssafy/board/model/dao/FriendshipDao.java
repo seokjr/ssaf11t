@@ -24,4 +24,7 @@ public interface FriendshipDao {
 	// 나한테 친구 요청중인 상대 리스트 검색
 	public List<Friendship> selectAcceptedFriends(String id);
 	
+	// 기존에 이런 관계가 존재하는가?(있으면 객체 그대로 반환, 없으면 null 반환)
+	public Friendship getFriendshipByUserIdsAndStatus(Friendship friendship);
+	
 }

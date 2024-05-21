@@ -27,6 +27,11 @@ public class Friendship {
 		this.user2Id = user2Id;
 	}
 
+	// 유저 둘 순서를 뒤바꾼 friendship으로 바꾼다.
+	public Friendship reverseUserId() {
+		return new Friendship(user2Id, user1Id);
+	}
+	
 	public int getFriendshipId() {
 		return friendshipId;
 	}

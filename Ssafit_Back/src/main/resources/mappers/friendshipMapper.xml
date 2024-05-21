@@ -42,5 +42,9 @@
 	</select>
 	
 	<!-- 중복 검사가 필요할 것 같다 -->
+	<select id="getFriendshipByUserIdsAndStatus" resultType="Friendship" parameterType="Friendship">
+		SELECT * FROM friendships
+		WHERE user1_id = #{user1Id} AND user2_id = #{user2Id} AND status = #{status};
+	</select>
 	
 </mapper>

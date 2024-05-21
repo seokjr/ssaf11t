@@ -70,7 +70,9 @@ create table if not EXISTS friendships(
         FOREIGN KEY (`user2_id`)
         REFERENCES `ssafit`.`users`(`id`)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
+	CONSTRAINT `unique_friendship`
+        UNIQUE (`user1_id`, `user2_id`)
 );
 
 DELIMITER //
@@ -88,4 +90,10 @@ END //
 DELIMITER ;
 
 -- 프로시저 호출
-CALL generateUsers(7);
+CALL generateUsers(5);
+
+INSERT INTO users (id, password, nickname, name, email)
+VALUES ('ssafy', '1234', '싸피', '김싸피', 'ssafy@ssafy.com'),
+('test', 'test', '테스트', '김싸피', 'test@ssafy.com'),
+('admin', 'admin', '관리자', '김싸피', 'admin@ssafy.com'),
+('ssafy123', '1234', '싸피123', '김싸피', 'ssafy123@ssafy.com');

@@ -2,15 +2,17 @@
     <div class="container">
       <h4 v-if="currentPageReviewList.length != 0"></h4>
       <h4 v-else class="text-center">리뷰가 없습니다. 영상 검색에서 영상을 보고 새로운 리뷰를 등록해주세요</h4>
-      <table class="table table-hover text-center" v-if="currentPageReviewList.length != 0">
+      <table class="table table-striped table-bordered table-hover" v-if="currentPageReviewList.length != 0">
+        <thead class="thead-dark">
         <tr>
-          <th>번호</th>
-          <th>내용</th>
-          <th>작성자</th>
-          <th>영상제목</th>
-          <th>채널명</th>
-          <th>등록일</th>
+          <th scope="col">번호</th>
+          <th scope="col">내용</th>
+          <th scope="col">작성자</th>
+          <th scope="col">영상제목</th>
+          <th scope="col">채널명</th>
+          <th scope="col">등록일</th>
         </tr>
+        </thead>
         <commentListItem v-for="review in currentPageReviewList"
         :key="review.commentTitle" :review="review" @click="clickReview(review)"/>
       </table>
@@ -63,7 +65,9 @@ const clickPage = function(page){
 }
 
 const currentPageReviewList = computed(()=>{
-  return reviewStore.reviewList.slice((currentPage.value-1) * perPage, currentPage.value * perPage)
+  const startIndex = (currentPage.value - 1) * perPage;
+  const endIndex = currentPage.value * perPage;
+  return reviewStore.reviewList.slice(startIndex, endIndex);
 })
 
   const router = useRouter()

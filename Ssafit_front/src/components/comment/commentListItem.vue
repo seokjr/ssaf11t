@@ -1,12 +1,14 @@
 <template>
+  <tbody class="tbody-dark">
     <tr>
-        <td>{{review.reviewId}}</td>
+        <th scope="row">{{review.reviewId}}</th>
         <td>{{review.commentContent}}</td>
         <td>{{review.userId }}</td>
         <td class="word">{{_.unescape(review.videoTitle)}}</td>
         <td>{{review.channelName}}</td>
         <td>{{review.regDate}}</td>
     </tr>
+  </tbody>
 </template>
 
 <script setup>

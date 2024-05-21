@@ -23,4 +23,7 @@ public interface FriendshipService {
 	// 나한테 친구 요청중인 상대 리스트 검색
 	public List<Friendship> selectAcceptedFriends(String id);
 	
+	// 이 관계 이미 친구인가요?
+	public boolean areFriends(Friendship friendship);
+	
 }

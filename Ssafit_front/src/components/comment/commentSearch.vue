@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center searchtotal">
       <div class="row align-items-center">
           <div class="col-2">
               <select class="form-select" v-model="searchInfo.key">
@@ -69,4 +69,9 @@ const sortChange = function () {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.searchtotal{
+    margin-top: 1.3rem;
+    margin-bottom: 1.3rem;
+}
+</style>

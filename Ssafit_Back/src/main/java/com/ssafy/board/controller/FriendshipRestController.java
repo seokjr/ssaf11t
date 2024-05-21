@@ -53,13 +53,24 @@ public class FriendshipRestController {
 	// 친구 요청 넣음
 	@PostMapping("/friend/insert")
 	public ResponseEntity<?> write(@RequestBody Friendship friendship) {
-		friendshipService.insertRequest(friendship);
-		return new ResponseEntity<>(HttpStatus.OK);
+		// 이미 친구인 사람이면(user2, user1, accepted) 친구 요청을 넣을 수 없어야 함.
+		if(friendshipService.areFriends(friendship)) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 친구인 상대입니다.");
+		}
+		try {
+			friendshipService.insertRequest(friendship);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 친구 신청을 한 상대입니다.");
+		}
+		
 	}
 	
 	// 친구 요청 수락
 	@PostMapping("/friend/accept")
 	public ResponseEntity<?> accept(@RequestBody Friendship friendship) {
+		friendshipService.deleteFriendship(friendship);
+		friendshipService.insertRequest(friendship);
 		friendshipService.acceptRequest(friendship);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -67,7 +78,6 @@ public class FriendshipRestController {
 	// 친구&친구 요청 삭제
 	@PostMapping("/friend/delete")
 	public ResponseEntity<?> delete(@RequestBody Friendship friendship) {
-		System.out.println(friendship.toString());
 		friendshipService.deleteFriendship(friendship);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

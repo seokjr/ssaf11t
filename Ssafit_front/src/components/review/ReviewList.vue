@@ -3,17 +3,20 @@
     <h4 v-if="currentPageReviewList.length != 0">리뷰 목록</h4>
     <h4 v-else>리뷰가 없습니다.</h4>
     <hr>
-    <table class="table table-hover text-center">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
       <tr>
-        <th>순서</th>
+        <th scope="col">순서</th>
         <th>작성자</th>
         <th>리뷰 내용</th>
         <th>리뷰 조회수</th>
         <th>등록일자</th>
         <th>작업</th>
       </tr>
+    </thead>
+    <tbody>
       <tr v-for="(review, index) in currentPageReviewList" :key="index">
-        <td>{{ index + 1 }}</td>
+        <th scope="row">{{ index + 1 }}</th>
         <td>{{ review.userId }}</td>
         <td>{{ review.commentContent }}</td>
         <td>{{ review.viewCnt }}</td>
@@ -26,6 +29,7 @@
           본인 댓글만 가능합니다.
         </td>
       </tr>
+    </tbody>
     </table>
 
     <nav aria-label="Page navigation">
