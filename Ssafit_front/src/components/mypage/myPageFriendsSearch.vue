@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h4 class="text-center">친구 검색</h4>
-    <br>
+    <br />
     <div class="row justify-content-center align-items-center">
       <div class="col-2">
         <select class="form-select" v-model="searchInfo.key">
@@ -10,38 +10,57 @@
         </select>
       </div>
       <div class="col-6">
-        <input type="text" class="form-control" v-model="searchInfo.word" @keyup.enter="searchUserList"/>
+        <input
+          type="text"
+          class="form-control"
+          v-model="searchInfo.word"
+          @keyup.enter="searchUserList"
+        />
       </div>
       <div class="col-auto">
-        <button class="btn btn-primary custom-btn" @click="searchUserList">검색</button>
+        <button class="btn btn-primary custom-btn" @click="searchUserList">
+          검색
+        </button>
       </div>
     </div>
-    <br><br>
-      <div v-for="someone of store.userSearchResultList" :key="someone.id">
-          <myPageFriendsItem v-if="someone.id !== props.id" :someone="someone" :my_id="props.id" :type="'someone'"/>
-      </div>
-      <p class="text-center" v-if="store.userSearchResultList.length === 0 || (store.userSearchResultList.length === 1 && store.userSearchResultList[0].id === props.id)">
-        검색 결과가 없습니다.
-      </p>
-      <br>
+    <br /><br />
+    <div v-for="someone of store.userSearchResultList" :key="someone.id">
+      <myPageFriendsItem
+        v-if="someone.id !== props.id"
+        :someone="someone"
+        :my_id="props.id"
+        :type="'someone'"
+      />
+    </div>
+    <p
+      class="text-center"
+      v-if="
+        store.userSearchResultList.length === 0 ||
+        (store.userSearchResultList.length === 1 &&
+          store.userSearchResultList[0].id === props.id)
+      "
+    >
+      검색 결과가 없습니다.
+    </p>
+    <br />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { useUserStore } from '@/stores/userStore';
-import myPageFriendsItem from './myPageFriendsItem.vue';
+import { useUserStore } from "@/stores/userStore";
+import myPageFriendsItem from "./myPageFriendsItem.vue";
 
 const store = useUserStore();
 const searchInfo = ref({
   key: "id",
-  word: ""
+  word: "",
 });
 const props = defineProps({
-  'id' : {
-      type : String,
-      required : true
-  }
+  id: {
+    type: String,
+    required: true,
+  },
 });
 
 const searchUserList = function () {
@@ -57,4 +76,4 @@ const searchUserList = function () {
 .custom-btn {
   width: 80px;
 }
-</style>  
+</style>

@@ -3,27 +3,32 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div id="map"></div>
-        <button @click="initMap">내위치</button>
+        <button @click="initMap" class="btn btn-outline-primary">내위치</button>
       </div>
     </div>
     <div id="menu_wrap" class="bg_white">
       <div class="option">
         <div>
           <form @submit.prevent="searchPlaces">
-            키워드 : <input type="text" v-model="keyword" id="keyword" size="15">
+            키워드 :
+            <input type="text" v-model="keyword" id="keyword" size="15" />
             <button type="submit">검색하기</button>
           </form>
         </div>
       </div>
-      <hr>
+      <hr />
       <ol id="placesList"></ol>
-      <div id="pagination" aria-label="Page navigation" class="pagination d-flex justify-content-center"></div>
+      <div
+        id="pagination"
+        aria-label="Page navigation"
+        class="pagination d-flex justify-content-center"
+      ></div>
     </div>
   </div>
 </template>
-  
+
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 
 let map = null;
 let ps = null;
@@ -47,7 +52,7 @@ const initMap = () => {
     });
   }
 
-  const container = document.getElementById('map');
+  const container = document.getElementById("map");
   const options = {
     center: myCenter,
     level: 3,
@@ -68,7 +73,7 @@ const initMap = () => {
 
 const searchPlaces = () => {
   if (!keyword.value.trim()) {
-    alert('키워드를 입력해주세요!');
+    alert("키워드를 입력해주세요!");
     return;
   }
 
@@ -80,15 +85,15 @@ const placesSearchCB = (data, status, pagination) => {
     displayPlaces(data);
     displayPagination(pagination);
   } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-    alert('검색 결과가 존재하지 않습니다.');
+    alert("검색 결과가 존재하지 않습니다.");
   } else if (status === kakao.maps.services.Status.ERROR) {
-    alert('검색 결과 중 오류가 발생했습니다.');
+    alert("검색 결과 중 오류가 발생했습니다.");
   }
 };
 
 const displayPlaces = (places) => {
-  const listEl = document.getElementById('placesList');
-  const menuEl = document.getElementById('menu_wrap');
+  const listEl = document.getElementById("placesList");
+  const menuEl = document.getElementById("menu_wrap");
   const fragment = document.createDocumentFragment();
   const bounds = new kakao.maps.LatLngBounds();
 
@@ -102,11 +107,11 @@ const displayPlaces = (places) => {
 
     bounds.extend(placePosition);
 
-    kakao.maps.event.addListener(marker, 'mouseover', () => {
+    kakao.maps.event.addListener(marker, "mouseover", () => {
       displayInfowindow(marker, place.place_name);
     });
 
-    kakao.maps.event.addListener(marker, 'mouseout', () => {
+    kakao.maps.event.addListener(marker, "mouseout", () => {
       infowindow.close();
     });
 
@@ -127,7 +132,7 @@ const displayPlaces = (places) => {
 };
 
 const getListItem = (index, place) => {
-  const el = document.createElement('li');
+  const el = document.createElement("li");
   let itemStr = `<span class="markerbg marker_${index + 1}"></span>
                  <div class="info">
                    <h5>${place.place_name}</h5>`;
@@ -140,19 +145,24 @@ const getListItem = (index, place) => {
   itemStr += `<span class="tel">${place.phone}</span></div>`;
 
   el.innerHTML = itemStr;
-  el.className = 'item';
+  el.className = "item";
   return el;
 };
 
 const addMarker = (position, idx) => {
-  const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png';
+  const imageSrc =
+    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png";
   const imageSize = new kakao.maps.Size(36, 37);
   const imgOptions = {
     spriteSize: new kakao.maps.Size(36, 691),
-    spriteOrigin: new kakao.maps.Point(0, (idx * 46) + 10),
+    spriteOrigin: new kakao.maps.Point(0, idx * 46 + 10),
     offset: new kakao.maps.Point(13, 37),
   };
-  const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions);
+  const markerImage = new kakao.maps.MarkerImage(
+    imageSrc,
+    imageSize,
+    imgOptions
+  );
   const marker = new kakao.maps.Marker({
     position,
     image: markerImage,
@@ -164,12 +174,12 @@ const addMarker = (position, idx) => {
 };
 
 const removeMarker = () => {
-  markers.forEach(marker => marker.setMap(null));
+  markers.forEach((marker) => marker.setMap(null));
   markers = [];
 };
 
 const displayPagination = (pagination) => {
-  const paginationEl = document.getElementById('pagination');
+  const paginationEl = document.getElementById("pagination");
   const fragment = document.createDocumentFragment();
 
   while (paginationEl.hasChildNodes()) {
@@ -177,19 +187,19 @@ const displayPagination = (pagination) => {
   }
 
   for (let i = 1; i <= pagination.last; i++) {
-    const el = document.createElement('a');
-    
-    el.className = 'page-link'
+    const el = document.createElement("a");
+
+    el.className = "page-link";
     el.href = "#";
     el.innerHTML = i;
 
     if (i === pagination.current) {
-      el.className = 'on page-link';
+      el.className = "on page-link";
     } else {
       el.onclick = (function (i) {
         return function () {
           pagination.gotoPage(i);
-        }
+        };
       })(i);
     }
 
@@ -214,9 +224,11 @@ onMounted(() => {
   if (window.kakao && window.kakao.maps) {
     initMap();
   } else {
-    const script = document.createElement('script');
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${import.meta.env.VITE_KAKAO_API_KEY}&libraries=services`;
-    script.addEventListener('load', () => {
+    const script = document.createElement("script");
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${
+      import.meta.env.VITE_KAKAO_API_KEY
+    }&libraries=services`;
+    script.addEventListener("load", () => {
       kakao.maps.load(initMap);
     });
     document.head.appendChild(script);
@@ -224,7 +236,6 @@ onMounted(() => {
 });
 </script>
 
-  
 <style scoped>
 #map {
   width: 100%;
@@ -252,7 +263,7 @@ onMounted(() => {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 2px solid #5F5F5F;
+  border-top: 2px solid #5f5f5f;
   margin: 3px 0;
 }
 #menu_wrap .option {
@@ -292,7 +303,8 @@ onMounted(() => {
 }
 #placesList .info .jibun {
   padding-left: 26px;
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+    no-repeat;
 }
 #placesList .info .tel {
   color: #009900;
@@ -303,7 +315,8 @@ onMounted(() => {
   width: 36px;
   height: 37px;
   margin: 10px 0 0 10px;
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+    no-repeat;
 }
 #pagination {
   margin: 10px auto;

@@ -76,8 +76,8 @@ public class BoardRestController {
 	// 게시글 조회수 업데이트
 	@PutMapping("/board/{reviewId}")
 	public ResponseEntity<?> updateViewCnt(@PathVariable int reviewId) {
+		
 		boardService.updateViewCnt(reviewId);
-		System.out.println("여기로 오는지 확인");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	// 게시글 상세 보기
@@ -100,11 +100,11 @@ public class BoardRestController {
 	}
 
 	// 게시글 수정 (JSON 형태로 보낸다)
-	@PutMapping("/board/{userId}&{regDate}")
-	public ResponseEntity<Void> update(@PathVariable String userId, @PathVariable String regDate, @RequestBody Board board) {
-		System.out.println(board);
-		System.out.println(userId + "," + regDate);
-		System.out.println("----");
+	@PutMapping("/board/{userId}/{regDate}")
+	public ResponseEntity<Void> update(@PathVariable("userId") String userId, @PathVariable("regDate") String regDate, @RequestBody Board board) {
+//		System.out.println(board);
+//		System.out.println(userId + "," + regDate);
+//		System.out.println("----");
 		boardService.modifyBoard(board); // id를 따로 보내왔다면 바구니(DTO)에 넣어놓고 보내자
 		return new ResponseEntity<Void>(HttpStatus.OK); // 조금 더 세밀하게 컨트롤할 수 있다.
 	}

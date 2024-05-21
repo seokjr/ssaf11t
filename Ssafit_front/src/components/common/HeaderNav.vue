@@ -3,19 +3,23 @@
     <header>
       <nav>
         <div class="menu">
-          <RouterLink to="/">Home</RouterLink> | 
-          <RouterLink to="/comment">리뷰 목록</RouterLink> | 
-          <RouterLink to="/youtube">영상 검색</RouterLink> | 
-          <RouterLink :to="{name : 'map'}">헬스장찾기</RouterLink>
-          <RouterLink v-if="userHasId" :to="{ name: 'myPageMain', params: { id: user.id } }">| 마이페이지</RouterLink>
+          <RouterLink to="/">Home</RouterLink> |
+          <RouterLink to="/comment">리뷰 목록</RouterLink> |
+          <RouterLink to="/youtube">영상 검색</RouterLink> |
+          <RouterLink :to="{ name: 'map' }">헬스장찾기</RouterLink>
+          <RouterLink
+            v-if="userHasId"
+            :to="{ name: 'myPageMain', params: { id: user.id } }"
+            >| 마이페이지</RouterLink
+          >
         </div>
         <div class="user" v-if="isLoggedIn">
-          <span>{{ user.nickname }} 님 환영합니다.</span>
+          <span style="color: black">{{ user.nickname }} 님 환영합니다.</span>
           <RouterLink @click="logout" to="/">로그아웃</RouterLink>
         </div>
         <div class="user" v-else>
-          <RouterLink :to="{name : 'login'}">로그인</RouterLink> | 
-          <RouterLink :to="{name : 'signup'}">회원가입</RouterLink>
+          <RouterLink :to="{ name: 'login' }">로그인</RouterLink> |
+          <RouterLink :to="{ name: 'signup' }">회원가입</RouterLink>
         </div>
       </nav>
     </header>
@@ -23,13 +27,13 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
-import { useUserStore } from '@/stores/userStore';
-import { computed } from 'vue';
+import { RouterLink } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
+import { computed } from "vue";
 
 const { user, getUser, logout } = useUserStore();
 const isLoggedIn = computed(() => !!getUser());
-const userHasId = computed(() => user && user.hasOwnProperty('id'));
+const userHasId = computed(() => user && user.hasOwnProperty("id"));
 </script>
 
 <style scoped>

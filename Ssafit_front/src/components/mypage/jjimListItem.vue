@@ -1,9 +1,11 @@
 <template>
   <tr>
-    <td @click="clickReview(Jjim)">{{ Jjim.jjimId }}</td>
-    <td @click="clickReview(Jjim)"><img :src="Jjim.imgSource"></td>
+    <th scope="row" @click="clickReview(Jjim)">{{ Jjim.jjimId }}</th>
+    <td @click="clickReview(Jjim)"><img :src="Jjim.imgSource" /></td>
     <td @click="clickReview(Jjim)">{{ Jjim.channelName }}</td>
-    <td @click="clickReview(Jjim)">{{ _.unescape(Jjim.videoTitle) }}</td>
+    <td class="word" @click="clickReview(Jjim)">
+      {{ _.unescape(Jjim.videoTitle) }}
+    </td>
     <td @click="clickReview(Jjim)">{{ Jjim.publishTime }}</td>
     <td>
       <button @click="deleteJjim(Jjim)">🗑️</button>
@@ -12,39 +14,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useJjimStore } from '@/stores/jjimStore';
-import { useYoutubeStore } from '@/stores/youtube';
-import { useRouter } from 'vue-router'
-import _ from 'lodash'
+import { ref } from "vue";
+import { useJjimStore } from "@/stores/jjimStore";
+import { useYoutubeStore } from "@/stores/youtube";
+import { useRouter } from "vue-router";
+import _ from "lodash";
 
 const router = useRouter();
 
-const jjimStore = useJjimStore()
+const jjimStore = useJjimStore();
 const youtubeStore = useYoutubeStore();
 
-const clickReview = function(review){
-    youtubeStore.clickReview(review.videoId);
-    router.push({ name: "videoDetail", params: { id: review.videoId } })
-}
+const clickReview = function (review) {
+  youtubeStore.clickReview(review.videoId);
+  router.push({ name: "videoDetail", params: { id: review.videoId } });
+};
 
 const props = defineProps({
   Jjim: {
     type: Object,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 const deleteJjim = async (jjim) => {
-  await jjimStore.deleteJjim(jjim.userId, jjim.videoId)
-}
+  await jjimStore.deleteJjim(jjim.userId, jjim.videoId);
+};
 </script>
 
 <style scoped>
 .word {
   white-space: nowrap;
-  display: block;
-  width: 300px;
+  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

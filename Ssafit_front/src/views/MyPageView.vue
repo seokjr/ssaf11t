@@ -1,12 +1,9 @@
 <template>
-    <div class="container">
-        <RouterView />
-    </div>
+  <div class="container">
+    <RouterView />
+  </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

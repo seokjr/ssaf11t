@@ -7,7 +7,8 @@ create table if not exists users(
     password varchar(45) not null,
     nickname varchar(45) not null unique,
     name varchar(20) not null,
-    email varchar(45) not null unique
+    email varchar(45) not null unique,
+    profile_image varchar(45) not null default 'jumping_cat.jpg'
 );
 
 create table if not exists jjim(
@@ -76,17 +77,29 @@ create table if not EXISTS friendships(
 );
 
 DELIMITER //
+
 CREATE PROCEDURE generateUsers(IN numUsers INT)
 BEGIN
     DECLARE i INT DEFAULT 1;
-    
+	DECLARE profileImage VARCHAR(20);
+
     WHILE i <= numUsers DO
-        INSERT INTO users (id, password, nickname, name, email)
-        VALUES (CONCAT('user', i), CONCAT('pass', i), CONCAT('nick', i), CONCAT('name', i), CONCAT('e@', i));
+        CASE i
+            WHEN 1 THEN SET profileImage = 'first.jpg';
+            WHEN 2 THEN SET profileImage = 'second.jpg';
+            WHEN 3 THEN SET profileImage = 'third.jpg';
+            WHEN 4 THEN SET profileImage = 'fourth.jpg';
+            WHEN 5 THEN SET profileImage = 'fifth.jpg';
+            ELSE SET profileImage = null;
+        END CASE;
+
+        INSERT INTO users (id, password, nickname, name, email, profile_image)
+        VALUES (CONCAT('user', i), CONCAT('pass', i), CONCAT('nick', i), CONCAT('name', i), CONCAT('e@', i), profileImage);
         
         SET i = i + 1;
     END WHILE;
 END //
+
 DELIMITER ;
 
 -- 프로시저 호출

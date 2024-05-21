@@ -6,26 +6,18 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.board.model.dto.Board;
 import com.ssafy.board.model.dto.Friendship;
-import com.ssafy.board.model.dto.SearchCondition;
 import com.ssafy.board.model.dto.User;
-import com.ssafy.board.model.service.BoardService;
 import com.ssafy.board.model.service.FriendshipService;
 import com.ssafy.board.model.service.UserServiceImpl;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -88,7 +80,7 @@ public class FriendshipRestController {
 		List<Friendship> templist = friendshipService.selectPendingFriends(id);
 		List<User> list = new ArrayList<User>();
 		for(Friendship f : templist) {
-			User user = new User(f.getUser1Id(), userServiceImpl.chooseOneUser(f.getUser1Id()).getNickname());
+			User user = new User(f.getUser1Id(), userServiceImpl.chooseOneUser(f.getUser1Id()).getNickname(), userServiceImpl.chooseOneUser(f.getUser1Id()).getProfileImage());
 			list.add(user);
 		}
 		return new ResponseEntity<List<User>>(list, HttpStatus.OK);
@@ -102,9 +94,9 @@ public class FriendshipRestController {
 		for(Friendship f : templist) {
 			User user;
 			if(id.equals(f.getUser1Id())) {
-				user = new User(f.getUser2Id(), userServiceImpl.chooseOneUser(f.getUser2Id()).getNickname());
+				user = new User(f.getUser2Id(), userServiceImpl.chooseOneUser(f.getUser2Id()).getNickname(), userServiceImpl.chooseOneUser(f.getUser2Id()).getProfileImage());
 			} else {
-				user = new User(f.getUser1Id(), userServiceImpl.chooseOneUser(f.getUser1Id()).getNickname());
+				user = new User(f.getUser1Id(), userServiceImpl.chooseOneUser(f.getUser1Id()).getNickname(), userServiceImpl.chooseOneUser(f.getUser1Id()).getProfileImage());
 			}
 			list.add(user);
 		}
