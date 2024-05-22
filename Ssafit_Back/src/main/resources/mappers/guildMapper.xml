@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 네임스페이스에 DAO 풀패키지명을 작성 -->
+<mapper namespace="com.ssafy.board.model.dao.GuildDao">
+
+	<!-- 전체 길드 조회-->
+	<select id="selectAll" resultType="Guild">
+		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date 
+		FROM guilds;
+	</select>
+	
+	<!-- 길드 생성 -->
+	<insert id="insertGuild" parameterType="Guild">
+		INSERT INTO guilds (guild_name, tag)
+		VALUES (#{guildName}, #{tag});
+	</insert>
+	
+	<!-- 길드명과 정확히 일치하는 길드 찾기(PK) -->
+	<select id="selectOneByGuildName" resultType="Guild" parameterType="String">
+		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date
+		FROM guilds
+		WHERE guild_name = #{guildName};
+	</select>
+	
+	<!-- 특정 키워드가 들어가는 길드명 리스트 찾기 -->
+	<select id="searchByGuildName" resultType="Guild" parameterType="String">
+		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date
+		FROM guilds
+		WHERE guild_name LIKE concat('%', #{keyword}, '%');
+	</select>
+	
+	<!-- 특정 키워드가 들어가는 태그를 보유한 길드명 리스트 찾기 -->
+	<select id="searchByGuildTag" resultType="Guild" parameterType="String">
+		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date
+		FROM guilds
+		WHERE tag LIKE concat('%', #{keyword}, '%');
+	</select>
+	
+	<!-- 길드 정보 수정
+	<update id="updateGuild" parameterType="">
+		UPDATE guilds
+		SET guild_name = #{GuildName}, tag = #{tag}
+		WHERE guild_name = #{guildName};
+	</update> -->
+	
+	<!-- 길드 삭제 -->
+	<delete id="deleteGuild" parameterType="String">
+		DELETE FROM guilds
+		WHERE guild_name = #{guildName};
+	</delete>
+	
+</mapper>

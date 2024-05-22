@@ -117,7 +117,7 @@ create table if not exists guilds(
     reg_date DATETIME not null default CURRENT_TIMESTAMP
 );
 
-create table if not exists guilds_user(
+create table if not exists guild_users(
     guild_name varchar(30) not null,
     user_id varchar(30) not null,
     status ENUM('member', 'master') DEFAULT 'member',
@@ -133,7 +133,7 @@ create table if not exists guilds_user(
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
-create table if not exists guilds_board(
+create table if not exists guild_boards(
     guild_name varchar(30) not null,
     user_id varchar(30) not null,
     board_title varchar(1024) not null,

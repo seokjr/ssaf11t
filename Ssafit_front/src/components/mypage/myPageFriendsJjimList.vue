@@ -2,7 +2,7 @@
   <div>
     <h2 class="text-center d-flex justify-content-between align-items-center">
       {{ route.params.id }}가 찜한 영상 목록
-      <button class="btn btn-outline-primary ms-auto" @click="goToFriends">
+      <button class="btn btn-outline-success ms-auto" @click="goToFriends">
         친구목록으로 가기
       </button>
     </h2>

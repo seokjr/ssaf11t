@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 네임스페이스에 DAO 풀패키지명을 작성 -->
+<mapper namespace="com.ssafy.board.model.dao.GuildUserDao">
+
+	<!-- 전체 정보 조회-->
+	<select id="selectAll" resultType="GuildUser">
+		SELECT *
+		FROM guild_users;
+	</select>
+	
+	<!-- 길드를 생성한/가입한 유저 정보 입력 -->
+	<insert id="insertGuildUser" parameterType="GuildUser">
+		INSERT INTO guild_users (guild_name, userId, status)
+		VALUES (#{guildName}, #{user_id}, #{status});
+	</insert>
+	
+	<!-- 길드에 가입한 유저 목록 -->
+	<select id="selectUserByGuildName" resultType="GuildUser" parameterType="String">
+		SELECT *
+		FROM guild_users
+		WHERE guild_name = #{guildName};
+	</select>
+	
+	<!-- 해당 유저가 가입한 길드 목록 -->
+	<select id="selectGuildByUserId" resultType="GuildUser" parameterType="String">
+		SELECT *
+		FROM guild_users
+		WHERE user_id = #{userId};
+	</select>
+	
+	<!-- 해당 길드명과 유저 아이디 조합으로 검색(PK) -->
+	<select id="selectByGuildNameAndUserId" resultType="GuildUser" parameterType="GuildUser">
+		SELECT *
+		FROM guild_users
+		WHERE guild_name = #{guildName} AND user_id = #{userId};
+	</select>
+	
+	<!-- 해당 길드명과 길드장 여부 조합으로 검색
+	<select id="selectByGuildNameAndStatus" resultType="GuildUser" parameterType="String">
+		SELECT *
+		FROM guild_users
+		WHERE guild_name = #{guildName} AND status = #{status};
+	</select> -->
+	
+	<!-- 유저 아이디와 길드장 여부 조합으로 검색
+	<select id="selectByUserIdAndStatus" resultType="GuildUser" parameterType="String">
+		SELECT *
+		FROM guild_users
+		WHERE user_id = #{userId} AND status = #{status};
+	</select> -->
+	
+	<!-- 유저 길드장 여부 수정  -->
+	<update id="updateStatus" parameterType="GuildUser">
+		UPDATE guild_users
+		SET status = #{status}
+		WHERE guild_name = #{guildName} AND user_id = #{userId};
+	</update>
+	
+	<!-- 길드 탈퇴 -->
+	<delete id="deleteGuildUser" parameterType="GuildUser">
+		DELETE FROM guild_users
+		WHERE guild_name = #{guildName} AND user_id = #{userId};
+	</delete>
+	
+</mapper>
