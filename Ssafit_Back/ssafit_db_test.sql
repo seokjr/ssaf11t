@@ -110,3 +110,45 @@ VALUES ('ssafy', '1234', '싸피', '김싸피', 'ssafy@ssafy.com'),
 ('test', 'test', '테스트', '김싸피', 'test@ssafy.com'),
 ('admin', 'admin', '관리자', '김싸피', 'admin@ssafy.com'),
 ('ssafy123', '1234', '싸피123', '김싸피', 'ssafy123@ssafy.com');
+
+create table if not exists guilds(
+    guild_name varchar(30) not null primary key,
+    tag varchar(20) not null,
+    reg_date DATETIME not null default CURRENT_TIMESTAMP
+);
+
+create table if not exists guilds_user(
+    guild_name varchar(30) not null,
+    user_id varchar(30) not null,
+    status ENUM('member', 'master') DEFAULT 'member',
+    primary key (guild_name, user_id),
+    CONSTRAINT `fk_guild_user_id`
+	FOREIGN KEY (`user_id`)
+	REFERENCES `ssafit`.`users`(`id`)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
+    CONSTRAINT `fk_guild_name`
+	FOREIGN KEY (`guild_name`)
+	REFERENCES `ssafit`.`guilds`(`guild_name`)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+);
+create table if not exists guilds_board(
+    guild_name varchar(30) not null,
+    user_id varchar(30) not null,
+    board_title varchar(1024) not null,
+    board_content varchar(1024) not null,
+    view_cnt int(10) default 0,
+    reg_date DATETIME not null default CURRENT_TIMESTAMP,
+    primary key (guild_name, user_id, reg_date),
+    CONSTRAINT `guild_user_id_fk`
+	FOREIGN KEY (`user_id`)
+	REFERENCES `ssafit`.`users`(`id`)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
+    CONSTRAINT `guild_name_fk`
+	FOREIGN KEY (`guild_name`)
+	REFERENCES `ssafit`.`guilds`(`guild_name`)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+);

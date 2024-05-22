@@ -2,9 +2,6 @@
   <div v-if="store.selectedVideo" class="container">
     <h3>
       {{ videoTitle }}
-      <button v-if="user !== null" @click="toggleJjim(store.selectedVideo)">
-        {{ isFavorite ? "🧡" : "🤍" }}
-      </button>
     </h3>
     <iframe
       width="560"
@@ -16,6 +13,11 @@
       referrerpolicy="strict-origin-when-cross-origin"
       allowfullscreen
     ></iframe>
+    <h4>
+      <button v-if="user !== null" @click="toggleJjim(store.selectedVideo)">
+        {{ isFavorite ? "🧡" : "🤍" }}
+      </button>
+    </h4>
     <hr />
     <ReviewView />
   </div>

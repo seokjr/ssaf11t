@@ -9,6 +9,7 @@
           id="userId"
           placeholder="작성자"
           readonly
+          disabled
         />
         <label for="userId">{{ userStore.getUser().id }}</label>
       </div>

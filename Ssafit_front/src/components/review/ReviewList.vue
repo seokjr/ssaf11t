@@ -25,10 +25,13 @@
           <td>{{ review.viewCnt }}</td>
           <td>{{ review.regDate }}</td>
           <td v-if="userHasId && user.id === review.userId">
-            <button @click="deleteReview(review.userId, review.regDate)">
+            <button class="doit" @click="openEditModal(review)">수정</button>
+            <button
+              class="doit"
+              @click="deleteReview(review.userId, review.regDate)"
+            >
               삭제
             </button>
-            <button @click="openEditModal(review)">수정</button>
           </td>
           <td v-else>본인 댓글만 가능합니다.</td>
         </tr>
@@ -185,5 +188,9 @@ const currentPageReviewList = computed(() => {
 a {
   text-decoration: none;
   color: black;
+}
+.doit {
+  border-radius: 20%;
+  margin: 5px;
 }
 </style>

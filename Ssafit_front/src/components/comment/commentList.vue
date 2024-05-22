@@ -96,7 +96,7 @@ const clickPage = function (page) {
 const currentPageReviewList = computed(() => {
   const startIndex = (currentPage.value - 1) * perPage;
   const endIndex = currentPage.value * perPage;
-  return reviewStore.reviewList.slice(startIndex, endIndex);
+  return reviewStore.reviewList.slice().reverse().slice(startIndex, endIndex);
 });
 
 const router = useRouter();
