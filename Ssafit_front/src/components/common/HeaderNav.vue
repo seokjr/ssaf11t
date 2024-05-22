@@ -1,17 +1,25 @@
 <template>
   <div id="container">
     <header>
+      <!-- <img
+        src="@/assets/ssaf11t_logo.jpg"
+        alt="Ssafit Logo"
+        style="height: 50px; margin-right: 20px"
+      /> -->
       <nav>
         <div class="menu">
           <RouterLink to="/">Home</RouterLink> |
           <RouterLink to="/comment">리뷰 목록</RouterLink> |
           <RouterLink to="/youtube">영상 검색</RouterLink> |
           <RouterLink :to="{ name: 'map' }">헬스장찾기</RouterLink>
-          <RouterLink
-            v-if="userHasId"
-            :to="{ name: 'myPageMain', params: { id: user.id } }"
-            >| 마이페이지</RouterLink
-          >
+          <span v-if="userHasId">
+            |<RouterLink :to="{ name: 'myPageMain', params: { id: user.id } }"
+              >마이페이지</RouterLink
+            >
+            |<RouterLink v-if="userHasId" :to="{ name: 'guild' }">
+              길드</RouterLink
+            >
+          </span>
         </div>
         <div class="user" v-if="isLoggedIn">
           <span style="color: black">{{ user.nickname }} 님 환영합니다.</span>
@@ -57,6 +65,7 @@ nav {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
+  color: black;
 }
 .user {
   margin-left: auto;

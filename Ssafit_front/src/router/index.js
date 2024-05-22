@@ -24,6 +24,10 @@ import MyPageFriendsJjimListView from "@/components/mypage/myPageFriendsJjimList
 import MyPageInfoChangeView from "@/components/mypage/myPageInfoChange.vue";
 import MyPageFriendsView from "@/components/mypage/myPageFriends.vue";
 
+import GuildView from "@/views/GuildView.vue";
+import guildList from "@/components/guild/guildList.vue";
+import guildDetail from "@/components/guild/guildDetail.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -128,6 +132,23 @@ const router = createRouter({
           path: "friends/:id",
           name: "friends",
           component: MyPageFriendsView,
+        },
+      ],
+    },
+    {
+      path: "/guild",
+      name: "guild",
+      component: GuildView,
+      children: [
+        {
+          path: "",
+          name: "guildList",
+          component: guildList,
+        },
+        {
+          path: ":/id",
+          name: "guildDetail",
+          component: guildDetail,
         },
       ],
     },

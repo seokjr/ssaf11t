@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useReviewStore } from "@/stores/reviewStore";
 import { useYoutubeStore } from "@/stores/youtube";
 import { useRoute, useRouter } from "vue-router";
@@ -49,12 +49,18 @@ const youtubestore = useYoutubeStore();
 const userStore = useUserStore();
 
 const user = userStore.getUser();
+const videoTitle = computed(() => {
+  return youtubestore.selectedVideo.snippet.title;
+});
+const channelName = computed(() => {
+  return youtubestore.selectedVideo.snippet.channelTitle;
+});
 
 const review = ref({
   userId: user ? user.id : "",
   videoId: route.params.id,
-  videoTitle: youtubestore.selectedVideo.snippet.title,
-  channelName: youtubestore.selectedVideo.snippet.channelTitle,
+  videoTitle: videoTitle,
+  channelName: channelName,
   commentContent: "",
 });
 
