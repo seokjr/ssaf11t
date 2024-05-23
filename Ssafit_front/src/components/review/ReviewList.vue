@@ -122,8 +122,8 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from "vue-router";
-import { ref, onMounted, watch, computed } from "vue";
+import { useRoute } from "vue-router";
+import { ref, onMounted, computed } from "vue";
 import { useReviewStore } from "@/stores/reviewStore";
 import { useUserStore } from "@/stores/userStore";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -135,8 +135,6 @@ const userHasId = computed(() => user && user.hasOwnProperty("id"));
 
 const store = useReviewStore();
 const route = useRoute();
-const router = useRouter();
-const reviewList = ref([]);
 
 const editReview = ref({ userId: "", regDate: "", commentContent: "" });
 

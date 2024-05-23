@@ -48,11 +48,9 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { useUserStore } from "@/stores/userStore";
 import { useFriendStore } from "@/stores/friendStore";
 import myPageFriendsItem from "./myPageFriendsItem.vue";
 
-const userStore = useUserStore();
 const friendStore = useFriendStore();
 
 const props = defineProps({

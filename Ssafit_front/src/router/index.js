@@ -146,7 +146,7 @@ const router = createRouter({
           component: guildList,
         },
         {
-          path: ":/id",
+          path: "/:id",
           name: "guildDetail",
           component: guildDetail,
         },

@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-import router from "@/router";
 
 export const useJjimStore = defineStore("jjim", () => {
   const REST_JJIM_API = "http://localhost:8080/jjim-api/jjim";

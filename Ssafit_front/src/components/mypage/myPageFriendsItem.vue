@@ -75,24 +75,20 @@ const handleInsertRequest = async function () {
   const result = await friendStore.insertRequest(props.my_id, props.someone.id);
   if (result === true) {
     requestSent.value = true;
-    // await friendStore.getAboutfriends(props.my_id);
   }
 };
 
 const handleCancelRequest = async function () {
   friendStore.deleteRequest(props.my_id, props.someone.id);
   requestSent.value = false;
-  // await friendStore.getAboutfriends(props.my_id);
 };
 
 const handleDeleteRequest = async function () {
   friendStore.deleteRequest(props.my_id, props.someone.id);
-  // await friendStore.getAboutfriends(props.my_id);
 };
 
 const handleAcceptRequest = async function () {
   friendStore.acceptRequest(props.my_id, props.someone.id);
-  // await friendStore.getAboutfriends(props.my_id);
 };
 
 const props = defineProps({

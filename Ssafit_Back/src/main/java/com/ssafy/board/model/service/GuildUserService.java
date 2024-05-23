@@ -2,6 +2,7 @@ package com.ssafy.board.model.service;
 
 import java.util.List;
 
+import com.ssafy.board.model.dto.Guild;
 import com.ssafy.board.model.dto.GuildUser;
 
 public interface GuildUserService {

@@ -1,6 +1,5 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
-import router from "@/router";
 import axios from "axios";
 const REST_REVIEW_API = `http://localhost:8080/review-api/board`;
 

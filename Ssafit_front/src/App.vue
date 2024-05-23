@@ -8,7 +8,6 @@
   </div>
 </template>
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
 import HeaderNav from "@/components/common/HeaderNav.vue";
 import Footer from "@/components/common/Footer.vue";
 </script>

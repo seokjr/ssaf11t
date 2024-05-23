@@ -8,47 +8,41 @@
 	<!-- 전체 길드 조회-->
 	<select id="selectAll" resultType="Guild">
 		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date 
-		FROM guilds;
+		FROM guilds
 	</select>
 	
 	<!-- 길드 생성 -->
 	<insert id="insertGuild" parameterType="Guild">
 		INSERT INTO guilds (guild_name, tag)
-		VALUES (#{guildName}, #{tag});
+		VALUES (#{guildName}, #{tag})
 	</insert>
 	
 	<!-- 길드명과 정확히 일치하는 길드 찾기(PK) -->
 	<select id="selectOneByGuildName" resultType="Guild" parameterType="String">
 		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date
 		FROM guilds
-		WHERE guild_name = #{guildName};
+		WHERE guild_name = #{guildName}
 	</select>
 	
-	<!-- 특정 키워드가 들어가는 길드명 리스트 찾기 -->
-	<select id="searchByGuildName" resultType="Guild" parameterType="String">
+	<!-- 길드명 리스트 찾기 -->
+	<select id="searchGuild" resultType="Guild" parameterType="SearchCondition">
 		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date
 		FROM guilds
-		WHERE guild_name LIKE concat('%', #{keyword}, '%');
+		<!-- 동적쿼리(검색 조건) -->
+		<if test="key != 'none'">
+			WHERE ${key} LIKE concat('%', #{word}, '%')
+		</if>
+		<!-- 동적쿼리(정렬 조건) -->
+		<if test="orderBy != 'none'">
+			ORDER BY ${orderBy} ${orderByDir}
+		</if>	
 	</select>
 	
-	<!-- 특정 키워드가 들어가는 태그를 보유한 길드명 리스트 찾기 -->
-	<select id="searchByGuildTag" resultType="Guild" parameterType="String">
-		SELECT guild_name, tag, date_format(reg_date, '%y-%m-%d') AS reg_date
-		FROM guilds
-		WHERE tag LIKE concat('%', #{keyword}, '%');
-	</select>
-	
-	<!-- 길드 정보 수정
-	<update id="updateGuild" parameterType="">
-		UPDATE guilds
-		SET guild_name = #{GuildName}, tag = #{tag}
-		WHERE guild_name = #{guildName};
-	</update> -->
 	
 	<!-- 길드 삭제 -->
 	<delete id="deleteGuild" parameterType="String">
 		DELETE FROM guilds
-		WHERE guild_name = #{guildName};
+		WHERE guild_name = #{guildName}
 	</delete>
 	
 </mapper>

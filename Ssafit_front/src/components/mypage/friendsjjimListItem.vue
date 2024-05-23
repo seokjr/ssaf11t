@@ -11,8 +11,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useJjimStore } from "@/stores/jjimStore";
 import { useYoutubeStore } from "@/stores/youtube";
 import { useRouter } from "vue-router";
 import _ from "lodash";

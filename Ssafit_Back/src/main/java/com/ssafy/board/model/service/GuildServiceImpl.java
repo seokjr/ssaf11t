@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.board.model.dao.GuildDao;
 import com.ssafy.board.model.dto.Guild;
+import com.ssafy.board.model.dto.SearchCondition;
 
 @Service
 public class GuildServiceImpl implements GuildService {
@@ -32,13 +33,8 @@ public class GuildServiceImpl implements GuildService {
 	}
 
 	@Override
-	public List<Guild> searchByGuildName(String Keyword) {
-		return guildDao.searchByGuildName(Keyword);
-	}
-
-	@Override
-	public List<Guild> searchByGuildTag(String Keyword) {
-		return guildDao.searchByGuildTag(Keyword);
+	public List<Guild> searchGuild(SearchCondition searchCondition) {
+		return guildDao.searchGuild(searchCondition);
 	}
 
 	@Override

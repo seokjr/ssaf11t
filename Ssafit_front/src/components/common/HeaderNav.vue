@@ -1,11 +1,12 @@
 <template>
   <div id="container">
     <header>
-      <!-- <img
-        src="@/assets/ssaf11t_logo.jpg"
+      <img
+        src="@/assets/ssaf11t_logo2.jpg"
         alt="Ssafit Logo"
-        style="height: 50px; margin-right: 20px"
-      /> -->
+        class="logo"
+        @click="goHome"
+      />
       <nav>
         <div class="menu">
           <RouterLink to="/">Home</RouterLink> |
@@ -16,7 +17,7 @@
             |<RouterLink :to="{ name: 'myPageMain', params: { id: user.id } }"
               >마이페이지</RouterLink
             >
-            |<RouterLink v-if="userHasId" :to="{ name: 'guild' }">
+            |<RouterLink v-if="userHasId" :to="{ name: 'guildList' }">
               길드</RouterLink
             >
           </span>
@@ -38,6 +39,12 @@
 import { RouterLink } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 import { computed } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const goHome = function () {
+  router.push({ name: "home" });
+};
 
 const { user, getUser, logout } = useUserStore();
 const isLoggedIn = computed(() => !!getUser());
@@ -49,12 +56,21 @@ const userHasId = computed(() => user && user.hasOwnProperty("id"));
   text-align: center;
 }
 header {
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid #ddd; /* 구분선을 추가 */
   padding: 20px 0; /* 위아래 여백 추가 */
   box-shadow: 0px 2px 0px rgb(185, 182, 182);
   font-size: 1.3rem;
 }
+.logo {
+  margin-right: 20px;
+  width: 5%;
+  height: 5%;
+  margin: 10px;
+}
 nav {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center; /* 수직 가운데 정렬 */
@@ -62,7 +78,7 @@ nav {
 }
 .menu {
   position: absolute;
-  left: 50%;
+  left: 48%;
   transform: translateX(-50%);
   text-align: center;
   color: black;

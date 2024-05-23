@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useReviewStore } from "@/stores/reviewStore";
 import _ from "lodash";
 

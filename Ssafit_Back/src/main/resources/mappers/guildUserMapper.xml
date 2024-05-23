@@ -13,8 +13,8 @@
 	
 	<!-- 길드를 생성한/가입한 유저 정보 입력 -->
 	<insert id="insertGuildUser" parameterType="GuildUser">
-		INSERT INTO guild_users (guild_name, userId, status)
-		VALUES (#{guildName}, #{user_id}, #{status});
+		INSERT INTO guild_users (guild_name, user_id, status)
+		VALUES (#{guildName}, #{userId}, #{status});
 	</insert>
 	
 	<!-- 길드에 가입한 유저 목록 -->

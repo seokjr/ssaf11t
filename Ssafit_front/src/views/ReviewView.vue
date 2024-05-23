@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <RouterView /> -->
     <ReviewList />
     <ReviewRegist />
   </div>

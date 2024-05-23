@@ -109,10 +109,7 @@ const currentPageJjimList = computed(() => {
 });
 
 const router = useRouter();
-const clickReview = function (Jjim) {
-  youtubeStore.clickReview(Jjim.videoId);
-  router.push({ name: "videoDetail", params: { id: Jjim.videoId } });
-};
+
 const goToFriends = () => {
   router.push({ name: "friends", params: { id: user.id } });
 };
