@@ -2,11 +2,12 @@
   <div id="container">
     <header>
       <img
-        src="@/assets/ssaf11t_logo2.jpg"
+        src="@/assets/ssaf11t_logo2.png"
         alt="Ssafit Logo"
         class="logo"
         @click="goHome"
       />
+      <h2 @click="goHome" style="color: rgb(123, 169, 187)">SSAF11T</h2>
       <nav>
         <div class="menu">
           <RouterLink to="/">Home</RouterLink> |
@@ -78,7 +79,7 @@ nav {
 }
 .menu {
   position: absolute;
-  left: 48%;
+  left: 44.5%;
   transform: translateX(-50%);
   text-align: center;
   color: black;
