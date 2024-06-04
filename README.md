@@ -1,5 +1,5 @@
-![TEST](~@SSAF11T_test.gif)
-<img src="./main/SSAF11T_test.gif" />
+## 시연영상
+![TEST_GIF](/SSAF11T_test.gif)
 # SSAF11T
 
 ## 1. 기획의도 및 목표
